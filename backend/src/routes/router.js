@@ -8,7 +8,7 @@ import {upload} from '../middlewares/multer.js'
 import { VerifyToken} from "../middlewares/Auth.js";
 import { check,addAddressDetails, AddFood, AddOrders, addToCart, getAddress, getallorders, getcartdata, getFood, getorders, removeFood, removefoodfromCart } from "../controllers/Fooditems/fooditems.js";
 const router = Router()
-router.route('/check').get(check)
+router.route('/check').post(check)
 router.route('/register').post(upload.fields([
     {
         name:"profile",
