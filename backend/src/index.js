@@ -7,7 +7,7 @@ dotenv.config({path:'./.env'})
 const app = express()
 const port = process.env.PORT ||8000
 const options={
-    origin:'http://localhost:5173',
+    origin:'https://tiny-gelato-acf3fe.netlify.app',
     credentials:true,
      methods: ["GET", "POST","PUT","DELETE"],
 }
