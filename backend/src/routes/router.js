@@ -6,8 +6,9 @@ import nodemail from "../controllers/mail/mailer.js";
 import { getUser, login, logout, register } from "../controllers/usercontroller.js";
 import {upload} from '../middlewares/multer.js'
 import { VerifyToken} from "../middlewares/Auth.js";
-import { addAddressDetails, AddFood, AddOrders, addToCart, getAddress, getallorders, getcartdata, getFood, getorders, removeFood, removefoodfromCart } from "../controllers/Fooditems/fooditems.js";
+import { check,addAddressDetails, AddFood, AddOrders, addToCart, getAddress, getallorders, getcartdata, getFood, getorders, removeFood, removefoodfromCart } from "../controllers/Fooditems/fooditems.js";
 const router = Router()
+router.route('/check').get(check)
 router.route('/register').post(upload.fields([
     {
         name:"profile",
