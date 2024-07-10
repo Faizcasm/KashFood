@@ -22,3 +22,19 @@ export const VerifyToken = async(req,res,next)=>{
         return res.status(402)
     }
 }
+
+export const cors = async(req, res, next) => {
+    res.set('Access-Control-Allow-Origin', ['http://localhost:5173']);
+    res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+   res.set('Access-Control-Request-Headers', '*');
+      res.append('Access-Control-Allow-Origin', ['http://localhost:5173']);
+    res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.append('Access-Control-Allow-Headers', 'Content-Type');
+   res.append('Access-Control-Request-Headers', '*');
+        res.header('Access-Control-Allow-Origin', ['http://localhost:5173']);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+   res.header('Access-Control-Request-Headers', '*');
+    next();
+  });
