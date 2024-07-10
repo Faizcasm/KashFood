@@ -4,6 +4,12 @@ import { uploadOnCloudinary } from "../../middlewares/cloudinary.js";
 import { FoodItems } from "../../models/fooditemsmodel/fooditemsmodel.js";
 import mongoose from "mongoose";
 import { User } from "../../models/usermodel/usermodel.js";
+
+const check =async(req,res)=>{
+ res.send("It is working fine")
+}
+
+
 const AddFood = async(req,res)=>{
     const {foodName,foodDescription,foodCategory,foodPrice} = req.body
     if(!foodCategory||!foodName||!foodDescription||!foodPrice){
@@ -216,4 +222,4 @@ const getorders=async(req,res)=>{
  return res.status(200).json(data)
 }
 export {AddFood,getFood,removeFood,addToCart,
-  getAddress,getcartdata,removefoodfromCart,addAddressDetails,AddOrders,getorders,getallorders}
+  getAddress,getcartdata,removefoodfromCart,addAddressDetails,AddOrders,getorders,getallorders,check}
