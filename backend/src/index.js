@@ -23,9 +23,17 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
 app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', ['http://localhost:5173']);
+    res.set('Access-Control-Allow-Origin', ['http://localhost:5173']);
+    res.set('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.set('Access-Control-Allow-Headers', 'Content-Type');
+   res.set('Access-Control-Request-Headers', '*');
+      res.append('Access-Control-Allow-Origin', ['http://localhost:5173']);
     res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.append('Access-Control-Allow-Headers', 'Content-Type');
+   res.append('Access-Control-Request-Headers', '*');
+        res.header('Access-Control-Allow-Origin', ['http://localhost:5173']);
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
    res.header('Access-Control-Request-Headers', '*');
     next();
   });
