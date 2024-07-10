@@ -7,17 +7,14 @@ dotenv.config({path:'./.env'})
 const app = express()
 const port = process.env.PORT ||8000
 const options={
-    origin:'https://tiny-gelato-acf3fe.netlify.app',
+    origin:['https://tiny-gelato-acf3fe.netlify.app'],
     credentials:true,
      methods: ["GET", "POST","PUT","DELETE"],
-    optionsSuccessStatus: 200
+    optionsSuccessStatus: 200,
+    allowedHeaders: ['Content-Type'],
+    exposedHeaders: ['Content-Type']
 }
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://tiny-gelato-acf3fe.netlify.app');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+
 
 app.use(express.json());
 app.use(cors(options));
@@ -25,7 +22,16 @@ app.use(express.static('public'))
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
-
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', '*');
+  res.header('Access-Control-Request-Headers', '*');
+  if (req.method === "OPTIONS") {
+    res.header('Access-Control-Allow-Methods', '*');
+    return res.status(200).json({});
+  }
+  next();
+});
 //
 //database
 database()
