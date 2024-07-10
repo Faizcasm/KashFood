@@ -62,6 +62,7 @@ const register =async(req,res)=>{
 //login
 
 const login =async(req,res)=>{
+   try{
     const {email,password} = req.body
     if(!email){
         console.log("All fields required");
@@ -95,6 +96,10 @@ const login =async(req,res)=>{
         return res.status(200).cookie('accessToken',accessToken,{secure:true,httpOnly:true})
        .json({user:user,accessToken})
     }
+   }
+   catch{
+      return res.status(505).json({message:"This is controller fault"})
+}
 }
 const logout = async(req,res)=>{
     const token = req?.cookies?.accessToken
