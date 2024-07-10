@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import { User } from "../../models/usermodel/usermodel.js";
 
 const check =async(req,res)=>{
- res.send("It is working fine")
+ return res.status(200).json({message:"It is working"});
 }
 
 
