@@ -23,7 +23,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
 app.use((req, res, next) => {
-    res.append('Access-Control-Allow-Origin', 'https://tiny-gelato-acf3fe.netlify.app');
+    res.append('Access-Control-Allow-Origin', ['https://tiny-gelato-acf3fe.netlify.app','http://localhost:5173']);
     res.append('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.append('Access-Control-Allow-Headers', 'Content-Type');
    res.header('Access-Control-Request-Headers', '*');
