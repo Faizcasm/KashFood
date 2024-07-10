@@ -11,8 +11,8 @@ const options={
     credentials:true,
      methods: ["GET", "POST","PUT","DELETE"],
     optionsSuccessStatus: 200,
-    allowedHeaders: ['Content-Type'],
-    exposedHeaders: ['Content-Type']
+    exposedHeaders: ['Content-Type'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
 }
 
 
