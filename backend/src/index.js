@@ -7,7 +7,7 @@ dotenv.config({path:'./.env'})
 const app = express()
 const port = process.env.PORT ||8000
 const options={
-    origin:'*',
+    origin:'http://localhost:5173',
     credentials:true,
      methods: ["GET", "POST","PUT","DELETE"],
     optionsSuccessStatus: 200,
@@ -23,7 +23,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
 app.use((req, res, next) => {
-   res.header('Access-Control-Allow-Origin', '*')
+   res.header('Access-Control-Allow-Origin', 'http://localhost:5173')
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     next();
   });
