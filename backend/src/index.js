@@ -6,8 +6,16 @@ import database from './db/db.js'
 dotenv.config({path:'./.env'})
 const app = express()
 const port = process.env.PORT ||8000
+const allowedOrigins = ['https://kashfood.netlify.app', 'https://kashfoodadmin.netlify.app'];
 const options={
-    origin:['https://kashfood.netlify.app','https://kashfoodadmin.netlify.app'],
+    origin: function (origin, callback) {
+        // Check if the incoming origin is in the allowed origins array
+        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials:true,
      methods: ["GET", "POST","PUT","DELETE"],
     optionsSuccessStatus: 200,
