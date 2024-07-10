@@ -6,7 +6,6 @@ import nodemail from "../controllers/mail/mailer.js";
 import { getUser, login, logout, register } from "../controllers/usercontroller.js";
 import {upload} from '../middlewares/multer.js'
 import { VerifyToken} from "../middlewares/Auth.js";
-import {cors} from '../middlewares/Auth.js';
 import { check,addAddressDetails, AddFood, AddOrders, addToCart, getAddress, getallorders, getcartdata, getFood, getorders, removeFood, removefoodfromCart } from "../controllers/Fooditems/fooditems.js";
 const router = Router()
 router.route('/check').get(check)
@@ -43,7 +42,7 @@ router.route('/addfood').post(upload.fields([
         maxCount:1
     }
 ]),AddFood)
-router.route('/getfood').get(cors,getFood)
+router.route('/getfood').get(getFood)
 router.route('/removefood/:id').delete(removeFood)
 router.route('/getallorders').get(getallorders)
 export default router
