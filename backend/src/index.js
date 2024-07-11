@@ -6,9 +6,8 @@ import database from './db/db.js'
 dotenv.config({path:'./.env'})
 const app = express()
 const port = process.env.PORT ||8000
-const allowedOrigins = ['https://kashfood.netlify.app', 'https://kashfoodadmin.netlify.app'];
 const options={
-    origin: 'https://kashfood.netlify.app/',
+    origin: 'https://kashfood.netlify.app',
     credentials:true,
      methods: ["GET", "POST","PUT","DELETE"],
     optionsSuccessStatus: 200,
