@@ -93,7 +93,7 @@ const login =async(req,res)=>{
     else{
         const {accessToken} = await generateTokens(user._id)
         console.log("login success");
-        return res.status(200).cookie('accessToken',accessToken,{secure:true,httpOnly:true,path:'https://kashfood.netlify.app'})
+        return res.status(200).cookie('accessToken',accessToken,{secure:true,httpOnly:true,path:'https://kashfood.netlify.app/'})
        .json({user:user,accessToken})
     }
    }
