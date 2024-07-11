@@ -107,7 +107,7 @@ const logout = async(req,res)=>{
 const user =await User.findById(req?.user?.id)
 console.log(user);
     return res.status(200)
-    .clearCookie('accessToken',{secure:true,httpOnly:true}).json({message:"Logout success",user})
+    .clearCookie('accessToken',{secure:true,httpOnly:true,path:'https://kashfood.netlify.app',sameSite: 'None'}).json({message:"Logout success",user})
 }
 const getUser = async(req,res)=>{
     const user = await req.user
