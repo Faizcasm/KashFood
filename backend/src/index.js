@@ -8,14 +8,7 @@ const app = express()
 const port = process.env.PORT ||8000
 const allowedOrigins = ['https://kashfood.netlify.app', 'https://kashfoodadmin.netlify.app'];
 const options={
-    origin: function (origin, callback) {
-        // Check if the incoming origin is in the allowed origins array
-        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: 'https://kashfood.netlify.app/',
     credentials:true,
      methods: ["GET", "POST","PUT","DELETE"],
     optionsSuccessStatus: 200,
@@ -31,7 +24,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(cookieParser())
 
 app.use((req, res, next) => {
-   res.header('Access-Control-Allow-Origin', ['https://kashfood.netlify.app','https://kashfoodadmin.netlify.app'])
+   res.header('Access-Control-Allow-Origin', 'https://kashfood.netlify.app')
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     next();
   });
