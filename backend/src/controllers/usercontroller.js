@@ -1,5 +1,5 @@
 import { User } from '../models/usermodel/usermodel.js';
-import {uploadOnCloudinary} from '../../middlewares/cloudinary.js'
+import {uploadOnCloudinary} from '../middlewares/cloudinary.js'
 import nodemailer from 'nodemailer'
 const generateTokens =async(userId)=>{
    try {
