@@ -35,12 +35,12 @@ const register =async(req,res)=>{
     console.log(avatarfilepath);
     if(!avatarfilepath){
         console.log("path missing");
-        return res.status(301)
+        return res.status(301).json({message:"No file path"})
     }
     const profile = await uploadOnCloudinary(avatarfilepath)
     if(!profile){
         console.log("Avatar required");
-        return res.status(301)
+        return res.status(301).json({message:"No profile photo"})
     }
     // const hashedpass = await bcrypt.hash(password,10)
     const cretedUser=await User.create({
