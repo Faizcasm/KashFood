@@ -14,6 +14,7 @@ const generateTokens =async(userId)=>{
 }
 
 const register =async(req,res)=>{
+   try{
     const {username,email,password} = req.body
     if(!username||!email){
         console.log("All fields required");
@@ -56,6 +57,11 @@ const register =async(req,res)=>{
         console.log("Register success");
         return res.status(200).json(cretedUser)
     }
+   }
+   catch{
+   return res.status(404).json({message:"Something wrong in multer"})
+      
+   }
 }
 
 
