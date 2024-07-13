@@ -19,7 +19,7 @@ const options={
 app.use(express.json());
 app.use(cors(options));
 app.use(express.urlencoded({extended:true}))
-app.use(express.static("public"))
+app.use(express.static("public/.gitkeep"))
 app.use(cookieParser())
 
 app.use((req, res, next) => {
