@@ -25,6 +25,7 @@ const dir = path.join(__dirname, 'public');
 const filePath = path.join(__dirname, 'public');
 fs.access(filePath, fs.constants.F_OK, (err) => {
   console.log(`${filePath} ${err ? 'does not exist' : 'exists'}`);
+  
 });
 
 app.use(express.static(dir));

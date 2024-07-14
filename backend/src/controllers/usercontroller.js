@@ -30,7 +30,7 @@ const register =async(req,res)=>{
         return res.status(301)
     }
     console.log(username,password,email);
-    console.log(req.files?.profile);
+    console.log(req.files.profile[0].path);
     const avatarfilepath = req.files?.profile[0]?.path
     console.log(avatarfilepath);
     if(!avatarfilepath){
