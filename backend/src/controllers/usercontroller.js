@@ -1,6 +1,11 @@
 import { User } from '../models/usermodel/usermodel.js';
 import {uploadOnCloudinary} from '../middlewares/cloudinary.js'
 import nodemailer from 'nodemailer'
+import path from 'path'
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const generateTokens =async(userId)=>{
    try {
     const user = await User.findById(userId)
@@ -47,7 +52,7 @@ const register =async(req,res)=>{
         email,
         username,
         password,
-        profile:profile.url
+        profile:profile.url,
     })
     if(!cretedUser){
         console.log("register failed");
