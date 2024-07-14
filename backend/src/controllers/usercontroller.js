@@ -35,9 +35,9 @@ const register =async(req,res)=>{
         return res.status(301)
     }
     console.log(username,password,email);
-    console.log(req.files.profile[0].path);
+    res.send("path",req.files?.profile[0]?.path)
     const avatarfilepath = req.files?.profile[0]?.path
-    console.log(avatarfilepath);
+    res.send(avatarfilepath)
     if(!avatarfilepath){
         console.log("path missing");
         return res.status(402).json({ message: "Error path" });
@@ -64,7 +64,7 @@ const register =async(req,res)=>{
     }
    }
    catch{
-    console.error('Error registering user:', error);
+    console.error('Error registering user:');
     return res.status(500).json({ message: "Internal server error" });
    }
 }
