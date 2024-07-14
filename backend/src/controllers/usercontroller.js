@@ -40,12 +40,12 @@ const register =async(req,res)=>{
     console.log(avatarfilepath);
     if(!avatarfilepath){
         console.log("path missing");
-        return res.status(401).json({message:"No file path"})
+        return res.status(402).json({ message: "Error path" });
     }
     const profile = await uploadOnCloudinary(avatarfilepath)
     if(!profile){
         console.log("Avatar required");
-        return res.status(402).json({message:"No profile photo"})
+        return res.status(402).json({ message: "Error uploading to Cloudinary" });
     }
     // const hashedpass = await bcrypt.hash(password,10)
     const cretedUser=await User.create({
@@ -64,8 +64,8 @@ const register =async(req,res)=>{
     }
    }
    catch{
-   return res.status(404).json({message:"Something wrong in multer"})
-      
+    console.error('Error registering user:', error);
+    return res.status(500).json({ message: "Internal server error" });
    }
 }
 
