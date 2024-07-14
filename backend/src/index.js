@@ -4,6 +4,7 @@ import express from 'express'
 import cookieParser from 'cookie-parser';
 import path from 'path'
 import { fileURLToPath } from 'url';
+import fs from 'fs'
 import database from './db/db.js'
 dotenv.config({path:'./.env'})
 const app = express()
@@ -20,6 +21,11 @@ const options={
 }
 
 const dir = path.join(__dirname, 'public');
+
+const filePath = path.join(__dirname, 'public');
+fs.access(filePath, fs.constants.F_OK, (err) => {
+  console.log(`${filePath} ${err ? 'does not exist' : 'exists'}`);
+});
 
 app.use(express.static(dir));
 app.use(express.json());
