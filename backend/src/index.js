@@ -2,10 +2,14 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import express from 'express'
 import cookieParser from 'cookie-parser';
+import path from 'path'
+import { fileURLToPath } from 'url';
 import database from './db/db.js'
 dotenv.config({path:'./.env'})
 const app = express()
 const port = process.env.PORT ||8000
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const options={
     origin: 'https://kashfood.netlify.app',
     credentials:true,
@@ -15,11 +19,12 @@ const options={
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
 }
 
+const dir = path.join(__dirname, 'public');
 
+app.use(express.static(dir));
 app.use(express.json());
 app.use(cors(options));
 app.use(express.urlencoded({extended:true}))
-app.use(express.static("public"))
 app.use(cookieParser())
 
 app.use((req, res, next) => {
