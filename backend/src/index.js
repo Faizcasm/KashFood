@@ -50,6 +50,10 @@ database()
 .catch(err=>{
     console.log(err);
 })
+
+
+
+
 //routes
 
 app.get("/",(req,res)=>{
@@ -59,4 +63,6 @@ app.get("/",(req,res)=>{
 import router from './routes/router.js';
 
 app.use('/',router)
+
+
 //listen
