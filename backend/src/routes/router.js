@@ -10,7 +10,7 @@ import { check,addAddressDetails, AddFood, AddOrders, addToCart, getAddress, get
 const router = Router()
 router.route('/check').post(check)
 router.route('/register').post(register)
-router.route('/updateprofile').post(upload.fields([
+router.route('/updateprofile').post(VerifyToken,upload.fields([
     {
         name:"profile",
         maxCount:1
