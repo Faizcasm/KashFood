@@ -3,13 +3,19 @@ import payment from '../controllers/pay/pay.js'
 import {order, getorderdata } from "../controllers/orders/orders.js";
 import {delivery, getaddress} from "../controllers/orders/delivery.js";
 import nodemail from "../controllers/mail/mailer.js";
-import { getUser, login, logout, register } from "../controllers/usercontroller.js";
+import { getUser, login, logout, register ,updateprofile} from "../controllers/usercontroller.js";
 import {upload} from '../middlewares/multer.js'
 import { VerifyToken} from "../middlewares/Auth.js";
 import { check,addAddressDetails, AddFood, AddOrders, addToCart, getAddress, getallorders, getcartdata, getFood, getorders, removeFood, removefoodfromCart } from "../controllers/Fooditems/fooditems.js";
 const router = Router()
 router.route('/check').post(check)
 router.route('/register').post(register)
+router.route('/updateprofile').post(upload.fields([
+    {
+        name:"profile",
+        maxCount:1
+    }
+]),updateprofile)
 router.route('/login').post(login)
 router.route('/user').get(VerifyToken,getUser)
 router.route('/logout').post(logout)

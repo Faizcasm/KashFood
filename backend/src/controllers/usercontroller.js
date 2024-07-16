@@ -220,4 +220,30 @@ const forgotpassword = async(req,res)=>{
     }
 }
 
-export {register,login,logout,getUser,changePassword,updateAccountDetails,mailer,forgotpassword}
+
+const updateprofile=async(req,res)=>{
+    const user = req?.user?._id
+    if(!user){
+        console.log("no user");
+        return res.status(400)
+    }
+    const profilepath = req?.body?.profile[0]?.path
+    if(!profilepath){
+        console.log("no path");
+        return res.status(400)
+    }
+    const profile = await uploadOnCloudinary(profilepath)
+    if(!profile){
+        console.log("no profile");
+        return res.status(400)
+    }
+    const updated = await user.profile.save()
+    if(!updated){
+        console.log("Failed to update");
+        return res.status(400)
+    }else{
+    console.log("updated success");
+    return res.status(200).json(updated)
+    }
+}
+export {register,login,logout,getUser,updateprofile,changePassword,updateAccountDetails,mailer,forgotpassword}
