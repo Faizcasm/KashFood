@@ -9,12 +9,7 @@ import { VerifyToken} from "../middlewares/Auth.js";
 import { check,addAddressDetails, AddFood, AddOrders, addToCart, getAddress, getallorders, getcartdata, getFood, getorders, removeFood, removefoodfromCart } from "../controllers/Fooditems/fooditems.js";
 const router = Router()
 router.route('/check').post(check)
-router.route('/register').post(upload.fields([
-    {
-        name:"profile",
-        maxCount:1
-    }
-]),register)
+router.route('/register').post(register)
 router.route('/login').post(login)
 router.route('/user').get(VerifyToken,getUser)
 router.route('/logout').post(logout)
