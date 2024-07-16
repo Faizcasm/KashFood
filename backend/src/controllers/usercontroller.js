@@ -220,30 +220,55 @@ const forgotpassword = async(req,res)=>{
     }
 }
 
+const updateprofile = async (req, res) => {
+    try {
+        const userId = req?.user?._id;
+        if (!userId) {
+            console.log("User ID not found in request");
+            return res.status(400).json({ error: "User ID not found" });
+        }
 
-const updateprofile=async(req,res)=>{
-    const user = req?.user?._id
-    if(!user){
-        console.log("no user");
-        return res.status(400)
+        const user = await User.findById(userId);
+        if (!user) {
+            console.log("No user found");
+            return res.status(400).json({ error: "User not found" });
+        }
+
+        const formData = req.files?.profile?.[0];
+        if (!formData) {
+            console.log("No profile file uploaded");
+            return res.status(400).json({ error: "Profile file not uploaded" });
+        }
+
+        const profilePath = formData.path;
+        if (!profilePath) {
+            console.log("No file path found");
+            return res.status(400).json({ error: "File path not found" });
+        }
+
+        const profile = await uploadOnCloudinary(profilePath);
+        if (!profile) {
+            console.log("Profile upload failed");
+            return res.status(400).json({ error: "Profile upload failed" });
+        }
+
+        // Assuming `profile` is the URL or identifier returned by Cloudinary
+        user.profile = profile.secure_url;
+
+        const updatedUser = await user.save();
+        if (!updatedUser) {
+            console.log("Failed to update user profile");
+            return res.status(400).json({ error: "Failed to update user profile" });
+        }
+
+        console.log("Profile updated successfully");
+        return res.status(200).json(updatedUser);
+    } catch (error) {
+        console.error("Error updating profile:", error);
+        return res.status(500).json({ error: "Internal server error" });
     }
-    const profilepath = req?.body?.profile[0]?.path
-    if(!profilepath){
-        console.log("no path");
-        return res.status(400)
-    }
-    const profile = await uploadOnCloudinary(profilepath)
-    if(!profile){
-        console.log("no profile");
-        return res.status(400)
-    }
-    const updated = await user.profile.save()
-    if(!updated){
-        console.log("Failed to update");
-        return res.status(400)
-    }else{
-    console.log("updated success");
-    return res.status(200).json(updated)
-    }
-}
+};
+
+
+
 export {register,login,logout,getUser,updateprofile,changePassword,updateAccountDetails,mailer,forgotpassword}
