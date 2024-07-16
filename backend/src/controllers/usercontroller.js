@@ -35,24 +35,10 @@ const register =async(req,res)=>{
         return res.status(301)
     }
     console.log(username,password,email);
-    res.send("path",req.files?.profile[0]?.path)
-    const avatarfilepath = req.files?.profile[0]?.path
-    res.send(avatarfilepath)
-    if(!avatarfilepath){
-        console.log("path missing");
-        return res.status(402).json({ message: "Error path" });
-    }
-    const profile = await uploadOnCloudinary(avatarfilepath)
-    if(!profile){
-        console.log("Avatar required");
-        return res.status(402).json({ message: "Error uploading to Cloudinary" });
-    }
-    // const hashedpass = await bcrypt.hash(password,10)
     const cretedUser=await User.create({
         email,
         username,
-        password,
-        profile:profile.url,
+        password
     })
     if(!cretedUser){
         console.log("register failed");
