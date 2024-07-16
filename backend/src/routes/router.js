@@ -15,10 +15,11 @@ const __dirname = path.dirname(__filename);
 
 //multer
 // Define the path for file storage
-const storage = multer.diskStorage({
+const storage = multer.memoryStorage({
     destination: (req, file, cb) => {
         // Use an absolute path to avoid issues in different environments
         cb(null, path.join(__dirname, '../public'));
+
     },
     filename: (req, file, cb) => {
         cb(null, file.originalname);
