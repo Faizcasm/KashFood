@@ -9,26 +9,18 @@ import nodemail from "../controllers/mail/mailer.js";
 import { getUser, login, logout, register ,updateprofile} from "../controllers/usercontroller.js";
 import { VerifyToken} from "../middlewares/Auth.js";
 import { check,addAddressDetails, AddFood, AddOrders, addToCart, getAddress, getallorders, getcartdata, getFood, getorders, removeFood, removefoodfromCart } from "../controllers/Fooditems/fooditems.js";
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 
-//multer
-// Define the path for file storage
-const storage = multer.memoryStorage({
-    destination: (req, file, cb) => {
-        // Use an absolute path to avoid issues in different environments
-        cb(null, path.join(__dirname, '../public'));
-
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public')
     },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname);
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
     }
-});
-
-const upload = multer({ storage });
-
-
+  })
+  
+  const upload = multer({ storage: storage })
 
 const router = Router()
 router.route('/check').post(check)

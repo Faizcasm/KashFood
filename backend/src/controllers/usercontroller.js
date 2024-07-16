@@ -220,9 +220,11 @@ const forgotpassword = async(req,res)=>{
     }
 }
 
+
 const updateprofile = async (req, res) => {
     try {
-        const userId = req?.user?._id;
+        const userId = req.user?._id;
+      
         if (!userId) {
             console.log("User ID not found in request");
             return res.status(400).json({ error: "User ID not found" });
@@ -234,26 +236,21 @@ const updateprofile = async (req, res) => {
             return res.status(400).json({ error: "User not found" });
         }
 
-        const formData = req.files?.profile?.[0];
-        if (!formData) {
+        // Handle profile image upload
+        const profileFile = req.files?.profile[0]?.path;
+        console.log("profile file ",profileFile);
+        if (!profileFile) {
             console.log("No profile file uploaded");
             return res.status(400).json({ error: "Profile file not uploaded" });
         }
-
-        const profilePath = formData.path;
-        if (!profilePath) {
-            console.log("No file path found");
-            return res.status(400).json({ error: "File path not found" });
+console.log(profileFile);
+        // Upload profile image to Cloudinary
+        const profile = await uploadOnCloudinary(profileFile);
+        if (!profile|| profile.error) {
+            return res.status(400).json({ error: "Profile upload to Cloudinary failed" });
         }
-
-        const profile = await uploadOnCloudinary(profilePath);
-        if (!profile) {
-            console.log("Profile upload failed");
-            return res.status(400).json({ error: "Profile upload failed" });
-        }
-
-        // Assuming `profile` is the URL or identifier returned by Cloudinary
-        user.profile = profile.secure_url;
+        // Update user profile with Cloudinary URL
+        user.profile = profile.url;
 
         const updatedUser = await user.save();
         if (!updatedUser) {
